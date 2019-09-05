@@ -13,4 +13,4 @@ def my_view(request):
         login(request, user)
         return render(request, 'home.html', {})
     else:
-        return redirect('%s?next=%s' % (awwards.settings.LOGIN_URL, request.path))
+        return render(request, 'myapp/login_error.html')

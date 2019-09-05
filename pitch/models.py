@@ -31,7 +31,7 @@ class Project(models.Model):
     image = models.ImageField(upload_to='image/', null=True)
     description = models.TextField(max_length=200, null=True)
     link = models.TextField(max_length=200, null=False)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile)
     design = models.IntegerField(min_value=1, max_value=9, default = 0)
     Usability = models.IntegerField(min_value=1, max_value=9, default = 0)
@@ -50,18 +50,18 @@ class Project(models.Model):
 
     @classmethod
     def search_by_user(cls, search_term):
-        images = cls.objects.filter(title__icontains=search_term)
-        return images
+        projects = cls.objects.filter(title__icontains=search_term)
+        return projects
 
     @classmethod
-    def get_image_by_id(cls, project_id):
-        images = cls.objects.get(id=project_id)
-        return images
+    def get_project_by_id(cls, project_id):
+        projects = cls.objects.get(id=project_id)
+        return projects
     
 class Comment(models.Model):
     comment = models.CharField(null=True, max_length=5000, verbose_name='name')
     date = models.DateTimeField(auto_now_add=True, null=True)
-    user = models.ForeignKey(User, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     class Meta:
         verbose_name = "comments"
