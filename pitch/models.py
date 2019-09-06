@@ -5,11 +5,11 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
-    IMAGE = models.ImageField(default='default.jpg',upload_to='profile_pics')
+    image = models.ImageField(default='default.jpg',upload_to='profile_pics')
     jobtitle = models.TextField()
     email = models.EmailField(unique=True, max_length=254)
     country = models.TextField(max_length=50, default='Anonymous')
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     last_update = models.DateTimeField(auto_now_add=True, null=True)
 
     class Meta:
@@ -31,7 +31,7 @@ class Project(models.Model):
     description = models.TextField(max_length=200, null=True)
     link = models.TextField(max_length=200, null=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    profile = models.ForeignKey(Profile)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     design = models.IntegerField(default = 0)
     Usability = models.IntegerField(default = 0)
     content = models.IntegerField(default = 0)
