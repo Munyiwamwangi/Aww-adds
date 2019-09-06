@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
 class Profile(models.Model):
-    profile_photo = models.ImageField('profile/', null=True)
+    user=models.OneToOneField(User,on_delete=models.CASCADE)
+    IMAGE = models.ImageField(default='default.jpg',upload_to='profile_pics')
     jobtitle = models.TextField()
     email = models.EmailField(unique=True, max_length=254)
     country = models.TextField(max_length=50, default='Anonymous')
@@ -16,7 +16,7 @@ class Profile(models.Model):
         ordering = ['-last_update']
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.username} Profile'
 
     def save_profile(self):
         self.save()
