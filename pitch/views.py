@@ -4,26 +4,10 @@ from django.http import HttpResponse
 # from django.contrib.auth import authenticate, login, login_required
 
 # Create your views here.
-posts = [
-{
-'author':'Joe',
-'title':'Post One',
-'content': 'Checker',
-'date':'Jan 21, 019'
-},
-{
-'author':'Munyi',
-'title':'Post Two',
-'content': 'checker2',
-'date':'Feb 21, 019'
-}
-
-]
-
 def home(request):
 
 	context={
-	'posts':posts
+	'posts':Project.objects.all()
 	}
 
 	return render(request, 'home.html', context)

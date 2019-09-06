@@ -1,3 +1,4 @@
+import datetime as dt
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -10,10 +11,7 @@ class Profile(models.Model):
     email = models.EmailField(unique=True, max_length=254)
     country = models.TextField(max_length=50, default='Anonymous')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    last_update = models.DateTimeField(auto_now_add=True, null=True)
 
-    class Meta:
-        ordering = ['-last_update']
 
     def __str__(self):
         return f'{self.user.username} Profile'
@@ -30,17 +28,19 @@ class Project(models.Model):
     image = models.ImageField(upload_to='image/', null=True)
     description = models.TextField(max_length=200, null=True)
     link = models.TextField(max_length=200, null=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     design = models.IntegerField(default = 0)
     Usability = models.IntegerField(default = 0)
     content = models.IntegerField(default = 0)
     likes = models.IntegerField(default=0)
-    pub_date = models.DateTimeField(auto_now_add=True)
+    date_posted = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-
+    def __str__(self):
+        return self.title
+    
     class Meta:
-        ordering = ['-pub_date']
+        ordering = ['date_posted']
 
     def save_image(self):
         self.save()
