@@ -1,0 +1,32 @@
+{% extends "pitch/base.html" %}
+{% block content %}
+	<div class="row">
+        <!-- empty -->
+        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2"></div>
+        <!-- empty -->
+        <div style="font-size: 8px; font-style: oblique;" class="col-md-8 col-sm-8 col-lg-8 col-xs-8">
+            <div class="content-section">
+                <form method = "POST">
+                   {% csrf_token %}
+                   <fieldset class="form-group mb-4">
+                    <legend class="border-bottom mb-4">Join Us
+                        {{ form.as_p}}
+                    </legend>
+                </fieldset> 
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">
+                        Sign Up
+                    </button>
+                </div>   
+            </form>
+            <div class="border-top pt-2">
+                <small class="text-muted">Have an account?<a class="ml-2" href="#"></a>
+                </small>
+            </div>
+        </div>
+        </div>
+        <!-- empty -->
+         <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2"></div>
+         <!-- empty -->
+    </div>
+{% endblock content %}

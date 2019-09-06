@@ -10,7 +10,7 @@ def home(request):
 	'posts':Project.objects.all()
 	}
 
-	return render(request, 'home.html', context)
+	return render(request, 'pitch/home.html', context)
 
 def about(request):
-	return render(request, 'about.html', {'title':'About'})
+	return render(request, 'pitch/about.html', {'title':'About'})
