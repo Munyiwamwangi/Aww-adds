@@ -4,9 +4,29 @@ from django.http import HttpResponse
 # from django.contrib.auth import authenticate, login, login_required
 
 # Create your views here.
+posts = [
+{
+'author':'Joe',
+'title':'Post One',
+'content': 'Checker',
+'date':'Jan 21, 019'
+},
+{
+'author':'Munyi',
+'title':'Post Two',
+'content': 'checker2',
+'date':'Feb 21, 019'
+}
+
+]
 
 def home(request):
-    return HttpResponse('<h1>Home Page</h1>')
+
+	context={
+	'posts':posts
+	}
+
+	return render(request, 'home.html', context)
 
 def about(request):
-    return HttpResponse('<h1>about pitch</h1>')
+	return render(request, 'about.html', {'title':'About'})
