@@ -39,6 +39,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'bootstrap3',
+    'users.apps.UsersConfig',
     'pitch.apps.PitchConfig',
     'django.contrib.admin',
     'django.contrib.auth',
