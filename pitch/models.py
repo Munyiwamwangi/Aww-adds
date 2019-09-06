@@ -2,9 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 
+
 # Create your models here.
-
-
 class Profile(models.Model):
     profile_photo = models.ImageField('profile/', null=True)
     jobtitle = models.TextField()
@@ -33,11 +32,12 @@ class Project(models.Model):
     link = models.TextField(max_length=200, null=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile)
-    design = models.IntegerField(min_value=1, max_value=9, default = 0)
-    Usability = models.IntegerField(min_value=1, max_value=9, default = 0)
-    content = models.IntegerField(min_value=1, max_value=9, default = 0)
+    design = models.IntegerField(default = 0)
+    Usability = models.IntegerField(default = 0)
+    content = models.IntegerField(default = 0)
     likes = models.IntegerField(default=0)
     pub_date = models.DateTimeField(auto_now_add=True)
+
 
     class Meta:
         ordering = ['-pub_date']
@@ -73,4 +73,3 @@ class Comment(models.Model):
 
     def delete_comment(self):
         self.delete()
-        
