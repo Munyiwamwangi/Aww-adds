@@ -8,9 +8,9 @@
 
 
   {% if title %}
-  <title>Instagram - {{title}}</title>
+  <title>Awwards - {{title}}</title>
   {% else %}
-    <title> Instagram </title>
+    <title> Awwards </title>
   {% endif %}
 
   {% block styles %}
@@ -28,8 +28,11 @@
 <body>
     {% include "navbar.html" %}
 
-    {% block content %}
+   <div style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoE3ErlBVh616PrQvI9jWXdpnOBwXgRX-luDqvlBjnCvJBRoOg'); background-repeat: no-repeat; background-size: cover ">
+      {% block content %}
+    
     {%endblock%}
+   </div>
 
     {% block scripts %}
     <!-- Compiled and minified CSS -->
