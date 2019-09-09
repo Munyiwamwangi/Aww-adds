@@ -59,10 +59,11 @@ To deploy on heroku:
 ## Versioning
 
 Find all the versions used in the requirements.txt or run the following command to confirm:
-```
+
 pip freeze
-```
-### License 
+
+### License
+
 MIT License
 Copyright (c) 2019 Sarah Munini
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -81,6 +82,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 Collapse
-
-
-
