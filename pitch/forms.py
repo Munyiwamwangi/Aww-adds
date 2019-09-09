@@ -1,28 +1,20 @@
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from . models import Profile, Comment, Project
+from .models import Profile, Image, Comments
 from django import forms
 
 
-class SignUpForm(UserCreationForm):
-    first_name = forms.CharField(
-        max_length=30, required=False, help_text='Optional.')
-    email = forms.EmailField(
-        max_length=254, help_text='Required. Inform a valid email address.')
-
+class getProfile(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ('username', 'first_name', 'last_name',
-                  'email', 'password1', 'password2', )
+        model = Profile
+        exclude = ['infor']
 
 
-class NewStatusForm(forms.ModelForm):
+class uploadPhoto(forms.ModelForm):
     class Meta:
-        model = Project
-        fields = ['image', 'image_caption']
+        model = Image
+        exclude = ['profile']
 
 
-class NewCommentForm(forms.ModelForm):
+class Comment(forms.ModelForm):
     class Meta:
-        model = Comment
-        fields = ['comment']
+        model = Comments
+        exclude = ['user', 'picture']

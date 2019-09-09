@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class="container" >
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10 col-lg-10" style="margin-left:auto; margin-right: auto;">
+            {% for image in images%}
+            <div class="border-info mb-4">
+                <div class="card-header bg-transparent border-info">{{image.name}}</div>
+                <div class="text-success">
+                    <img  class="card-img-top img-fluid" src="{{image.image.url}}" alt="Pic">
+
+                </div>
+                <div class="card-footer bg-transparent border-success">
+                    <i class="far fa-heart">Like</i>
+                    <a href="{% url 'comment' image.id %}"> <i class="far fa-comment">Comment</i> </a></div>
+            </div> ​
+            {% empty %}
+            <div class="row">
+                <h5 style="color:cyan" class="text-center">No Uploaded projects, register and post some for reviewing</h5>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- profile and bio information -->
+        <div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+                <div class="content-section ">
+                        {%for profileinformation in prof%}
+                        {{profileinformation.bio}}
+                        <img height="50" class="img-fluid" src="{{profileinformation.profile_picture.url}}" alt="image">
+                        {%endfor%}
+                </div>
+        </div>
+    </div>  
+</div>
+{% endblock%}
