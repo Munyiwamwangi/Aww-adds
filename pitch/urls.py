@@ -13,9 +13,6 @@ urlpatterns = [
     url(r'comment/(\d+)', views.comment, name='comment'),
     url(r'^profile_info/$', views.profile, name='profile_info'),
 
-    # url(r'^archives/(\d{4}-\d{2}-\d{2})/$',
-    #     views.past_days_images, name='pastImages'),
-    # url(r'^search/', views.search_results, name='search_results'),
 ]
 
 #To serve uploaded images on the development server we need to configure our urls.py to register the MEDIA_ROOT route.
