@@ -1,81 +1,97 @@
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.models import User
-from .models import Post, Comment
-from django.views.generic import (
-    ListView,
-    DetailView,
-    CreateView,
-    UpdateView,
-    DeleteView
-)
+from django.shortcuts import render, redirect
+from .models import Image, Profile, Comments
+from django.contrib.auth.decorators import login_required
+from .forms import getProfile, uploadPhoto, Comment
+
 # Create your views here.
-def home(request):
-
-	context={
-	'posts':Post.objects.all()
-	}
-
-	return render(request, 'pitch/home.html', context)
 
 
-def about(request):
-	return render(request, 'pitch/about.html', {'title':'About'})
+def welcome(request):
+    images = Image.objects.all()
+    prof = Profile.objects.filter(infor=request.user.id)[0:1]
+    return render(request, 'home.html', {"images": images, 'prof': prof})
 
 
-class PostListView(ListView):
-    model = Post
-    template_name = 'pitch/home.html'  # <app>/<model>_<viewtype>.html
-    context_object_name = 'posts'
-    ordering = ['-date_posted']
-    paginate_by = 5
+def search_image(request):
+    if 'image' in request.GET and request.GET["image"]:
+        search_term = (request.GET.get("image")).name()
+        searched_images = Image.search_by_name(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html', {"message": message, "images": searched_images})
+    else:
+        message = "You haven't searched for any image name"
+        return render(request, 'search.html', {"message": message})
 
 
-class UserPostListView(ListView):
-    model = Post
-    template_name = 'pitch/user_posts.html'  # <app>/<model>_<viewtype>.html
-    context_object_name = 'posts'
-    paginate_by = 5
-
-    def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Post.objects.filter(author=user).order_by('-date_posted')
+def index(request):
+    title = "Index Page"
+    return render(request, 'index.html', {"title": title})
 
 
-class PostDetailView(DetailView):
-    model = Post
+@login_required(login_url='/accounts/login/')
+def edit_profile_info(request):
+    logged_user = request.user.id
+    if request.method == 'POST':
+        form = getProfile(request.POST, request.FILES)
+        if form.is_valid():
+            edit = form.save(commit=False)
+            edit.infor = logged_user
+            edit.save()
+        return redirect('welcome')
+    else:
+        form = getProfile()
+
+    return render(request, 'profile.html', {'form': form})
 
 
-class PostCreateView(LoginRequiredMixin, CreateView):
-    model = Post
-    fields = ['title', 'content']
+@login_required(login_url='/accounts/login/')
+def Photo(request):
+    logged_user = request.user.id
+    if request.method == 'POST':
+        form = uploadPhoto(request.POST, request.FILES)
+        if form.is_valid():
+            Photo = form.save(commit=False)
+            Photo.profile = logged_user
+            Photo.save()
+            return redirect('welcome')
+    else:
+        form = uploadPhoto()
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-
-
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Post
-    fields = ['title', 'content']
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-
-    def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author:
-            return True
-        return False
+    return render(request, 'upload.html', {'form': form})
 
 
-class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Post
-    success_url = '/'
+@login_required(login_url='/accounts/login/')
+def comment(request, image_id):
 
-    def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author:
-            return True
-        return False
+    image = Image.objects.get(id=image_id)
+
+    if request.method == 'POST':
+        current_user = request.user
+        form = Comment(request.POST)
+        if form.is_valid:
+            comments = form.save(commit=False)
+            comments.user = current_user
+            comments.picture = image.id
+            comments.save()
+
+            return redirect('welcome')
+    else:
+        form = Comment()
+
+    comments = Comments.objects.filter(picture=image_id).all
+
+    return render(request, "comment.html", {'form': form, "image": image, "comments": comments})
+
+
+@login_required(login_url='/accounts/login/')
+def profile(request):
+    users = request.user.id
+
+    try:
+        profile = Profile.objects.filter(infor=users).first()
+        all_images = Image.objects.filter(infor=request.user.id).all()
+
+    except ObjectDoesNotExist:
+        return redirect('welcome')
+    return render(request, "pofile_image.html", {"profile": profile, "all_images": all_images})
