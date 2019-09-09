@@ -1,0 +1,27 @@
+{%extends "registration/base.html"%}
+{% load bootstrap3 %}
+{% block content %}
+<div class="container">
+  <div class="row">   
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
+     <div id="phone" style="float:right;display:flex">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="text-center"><em>Instagram</em></h1>
+        </div>
+        <div class="panel-body">
+            <p><b>Easy account creation, be a part of the story</b></p>
+                    <a class="btn btn-info" href="/accounts/login/">Login</a>
+<p>
+<p>No account yet?</p>
+        <a class="btn btn-primary" href="/accounts/register">Register</a>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- empty div -->
+    <div class="col-md-4"></div>
+  </div>
+</div>
+
+{% endblock %}
