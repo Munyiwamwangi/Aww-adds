@@ -1,34 +1,50 @@
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
-from django.urls import reverse
+
+# Create your models here.
 
 
-class Post(models.Model):
-    title = models.CharField(max_length=100)
-    content = models.TextField()
-    date_posted = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+class Comments(models.Model):
+    picture = models.IntegerField(default=0)
+    user = models.ForeignKey(User)
+    comments = models.TextField()
 
-    def __str__(self):
-        return self.title
-
-    def get_absolute_url(self):
-        return reverse('post-detail', kwargs={'pk': self.pk})
-    
-
-class Comment(models.Model):
-    comment = models.CharField(null=True, max_length=5000, verbose_name='name')
-    date = models.DateTimeField(auto_now_add=True, null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-
-    class Meta:
-        verbose_name = "comments"
-        verbose_name_plural = "comments"
-        ordering = ['-date']
-
-    def save_comment(self):
+    def save_profile(self):
         self.save()
 
-    def delete_comment(self):
+    def delete_profile(self):
         self.delete()
+
+
+class Profile(models.Model):
+    infor = models.IntegerField(default=0)
+    name = models.CharField(max_length=50, default='Anonym')
+    bio = models.CharField(max_length=80, blank=True)
+    profile_picture = models.ImageField(upload_to='images/', blank=True)
+
+    class Meta:
+        ordering = ['profile_picture']
+
+    def save_profile(self):
+        self.save()
+
+    def delete_profile(self):
+        self.delete()
+
+
+class Image(models.Model):
+    name = models.CharField(max_length=70)
+    profile = models.CharField(max_length=30, blank=True)
+    image = models.ImageField(upload_to='images/', blank=True)
+    caption = models.TextField()
+
+    def save_image(self):
+        self.save()
+
+    def delete_image(self):
+        self.delete()
+
+    @classmethod
+    def search_by_name(cls, search_term):
+        images = cls.objects.filter(image__name__icontains=search_term)
+        return images
