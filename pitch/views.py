@@ -8,8 +8,9 @@ from .forms import getProfile, uploadPhoto, Comment
 
 def welcome(request):
     images = Image.objects.all()
+    profiles = Profile.objects.all()
     prof = Profile.objects.filter(infor=request.user.id)[0:1]
-    return render(request, 'home.html', {"images": images, 'prof': prof})
+    return render(request, 'home.html', {"images": images, 'prof': prof, 'profiles':profiles})
 
 
 def search_image(request):

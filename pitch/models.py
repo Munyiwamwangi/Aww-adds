@@ -32,6 +32,8 @@ class Profile(models.Model):
 
 class Image(models.Model):
     name = models.CharField(max_length=70)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    contact = models.CharField(max_length=10, blank=True)
     profile = models.CharField(max_length=30, blank=True)
     link = models.CharField(max_length=50)
     image = models.ImageField(upload_to='images/', blank=True)
@@ -54,10 +56,8 @@ class Rating(models.Model):
     usability = models.IntegerField(default=0)
     content = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
-    image = models.ForeignKey(Image, on_delete=models.CASCADE)
-    image = models.ForeignKey(Image, on_delete=models.CASCADE)
-
-
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def save_rates(self):
         self.save()

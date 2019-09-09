@@ -12,7 +12,6 @@
   {% endif %}
   {% block styles %}
   {% load bootstrap3 %} {% load staticfiles %}
-
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
@@ -22,6 +21,7 @@
 <body>
     {% include "navbar.html" %}
    <div style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoE3ErlBVh616PrQvI9jWXdpnOBwXgRX-luDqvlBjnCvJBRoOg'); background-repeat: no-repeat; background-size: cover ">
+
       {% block content %}
     {%endblock%}
    </div>

@@ -5,13 +5,16 @@
         <div class="col-md-10 col-xs-10 col-sm-10 col-lg-10" style="margin-left:auto; margin-right: auto;">
             {% for image in images%}
             <div class="border-info mb-4">
-                <div class="card-header bg-transparent border-info">{{image.name}}</div>
+                <div class="card-header ">{{image.name}}</div>
+                <div class="card-header ">{{image.contact}}</div>
                 <div class="text-success">
-                    <img  class="card-img-top img-fluid" src="{{image.image.url}}" alt="Pic">
+                    <img height="100%" width="auto" style="display: flex;" class="img-fluid" src="{{image.image.url}}" alt="Pic">
 
                 </div>
                 <div class="card-footer bg-transparent border-success">
                     <i class="far fa-heart">Like</i>
+                    <i class="far fa-star">Rate </i>
+                    <i class="far fa-heart">Project Link</i>
                     <a href="{% url 'comment' image.id %}"> <i class="far fa-comment">Comment</i> </a></div>
             </div> ​
             {% empty %}
@@ -23,10 +26,19 @@
         
         <!-- profile and bio information -->
         <div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
-                <div class="content-section ">
+                <div row class="content-section ">
                         {%for profileinformation in prof%}
-                        {{profileinformation.bio}}
+                        <h6>Client: </h6>: {{profileinformation.bio}}
                         <img height="50" class="img-fluid" src="{{profileinformation.profile_picture.url}}" alt="image">
+                        {%endfor%}
+                </div>
+                <hr>
+                <br>
+                <h6 style="color: white; font-style: oblique;">Project Description</h6>
+                <br>
+                <div style="box-sizing: border-box;" row class="content-section ">
+                        {% for image in images%}
+                        <p style="font-weight: 2em;color: white;">{{image.caption}}</p>
                         {%endfor%}
                 </div>
         </div>
