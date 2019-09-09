@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Comments(models.Model):
     picture = models.IntegerField(default=0)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     comments = models.TextField()
 
     def save_profile(self):
@@ -16,7 +16,7 @@ class Comments(models.Model):
 
 class Profile(models.Model):
     infor = models.IntegerField(default=0)
-    name=models.CharField( max_length=50, default='Anonym')
+    name=models.CharField( max_length=50, default='')
     bio = models.CharField(max_length=80 , blank=True)
     profile_picture = models.ImageField(upload_to='images/', blank=True)
 
@@ -53,7 +53,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Comments(models.Model):
     picture = models.IntegerField(default=0)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     comments = models.TextField()
 
     def save_profile(self):
