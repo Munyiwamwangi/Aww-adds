@@ -2,28 +2,19 @@
 {% load bootstrap3 %} 
 {% load staticfiles %}
 {% block content %}
-<head>
-{% block styles %} {% bootstrap_css %}
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% endblock %}
-  <styles>
-
-  </styles>
-</head>
-<body>
-   {% block scripts %}
-  {% bootstrap_javascript %}
-   {% endblock %}
-<div class="col-md-10 ">
+{% block scripts %}
+{% bootstrap_javascript %}
+{% endblock %}
+<div class="col-sm2, col-md-2"></div>
+<div class="col-md-10 col-sm-10">
   <form  action="{%url 'uploadPhoto'%}" method="post" enctype="multipart/form-data">
     {%csrf_token%}
+
     {% bootstrap_form form%}
     <input type="submit" class="btn-success btn-sm btn-info" value="Post">
   </form>
-  </div>
-  <!-- empty div -->
+</div>
 <div class="col-md-2"></div>
-<!-- empry div -->
-
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </body>
-  {% endblock %}
+{% endblock %}

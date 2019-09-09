@@ -3,14 +3,12 @@
   <div class="container">
     <div class="row">
       {% if images %}
-      <h5 style="font-style: oblique; color: cyan">Found {{ images|length }} of searched posts {{message}}</h5> 
+      <h5 style="font-style: oblique;">Found {{ images|length }} of searched posts {{message}}</h5> 
       <br>
       {% else %}
       <br>
-      <h5 style="font-style: oblique; color: cyan"> Found 0 items for the search term {{message}}</h5>
-      
+      <h5 style="font-style: oblique;"> Found 0 items for the search term {{message}}</h5>
       {% endif %}
-
     </div>
     <div class="row">
       {% if images %}
@@ -24,3 +22,4 @@
     </div>
   </div>
   {% endblock %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">

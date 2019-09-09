@@ -50,6 +50,9 @@ class Image(models.Model):
         images = cls.objects.filter(image__name__icontains=search_term)
         return images
 
+    class Meta:
+        ordering = ['-id']
+
 
 class Rating(models.Model):
     design = models.IntegerField(default=0)

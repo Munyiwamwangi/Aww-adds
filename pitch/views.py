@@ -15,7 +15,7 @@ def welcome(request):
 
 def search_image(request):
     if 'image' in request.GET and request.GET["image"]:
-        search_term = (request.GET.get("image")).name()
+        search_term = request.GET.get("image")
         searched_images = Image.search_by_name(search_term)
         message = f"{search_term}"
 
@@ -24,6 +24,10 @@ def search_image(request):
         message = "You haven't searched for any image name"
         return render(request, 'search.html', {"message": message})
 
+
+def index(request):
+    title = "Index Page"
+    return render(request, 'index.html', {"title": title})
 
 def index(request):
     title = "Index Page"
