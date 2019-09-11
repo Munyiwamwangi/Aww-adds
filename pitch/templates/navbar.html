@@ -2,16 +2,28 @@
 <html>
 <head>
   <title></title>
-<style type="text/css">
-</style>
+  <style type="text/css">
+  </style>
 </head>
 <body>
-<div style="color: black; text-align: center; display: inline-block; height: 20px; margin-top: -2%; margin-left: 40%;
-" class="row navbar-header">
-      <a style="color: black" href="{% url 'welcome' %}"><h3>Awww ~ adds</h3>
+  <div style=" " class="navbar-fixed-top navbar-light bg-light navbar nav-fill navbar-collapse row mt-1" >
+    <!-- empty -->
+      <div class="col-md-4, col-sm-4, col-xs-4, col-lg-4">
+        <h6>MENU</h6>
+      </div>
+      <div class="col-md-4, col-sm-4, col-xs-4, col-lg-4 text-center" style="" class="row navbar-header">
+      <a style="color: black; text-decoration: none;" href="{% url 'welcome' %}"><h5>awww ~adds</h5>
       </a>
     </div>
-<nav style="background-color:black" class="navbar nav-fill navbar-collapse">
+    <div style="" class="col-md-4, col-sm-4, col-xs-4, col-lg-4">
+    <div  >
+      <a class=" btn-light btn-outline-info "  style=" float: right; text-decoration: none" href="{%url 'uploadPhoto'%}"><h6>SUBMIT PROJECT</h6>
+    </a>
+    </div>
+  </div>
+</div>
+<hr>
+<nav style="background-color:black" class="navbar-fixed-top navbar nav-fill navbar-collapse">
   <div class="container-fluid">
     <div class="col-sm-4 col-md-4 navbar-center">
       <form class="navbar-form" role="search" action="{% url 'search_image' %}">
@@ -22,14 +34,21 @@
           </div>
         </div>
       </form>
-      </div>
-      <h6><a  href="{%url 'uploadPhoto'%}">Post Project</a></h6>
-      <a  href="{% url 'edit_profile_info' %}"><i class="fas fa-user">Profile</i></a>
-      <ul>
-        <li>
-            <a href="/logout"><i class="fas fa-sign-out-alt">Logout</i></a>
-        </li>
-      </ul>
+    </div>
+    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">
+      
+    </div>
+     <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">
+      <a class="box-right" href="{% url 'edit_profile_info' %}"><i class="btn-outline-info fas fa-user"> Profile</i></a>
+    </div>
+    <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
+    <ul>
+      <li>
+        <a style="float: right;" href="/logout"><i class="btn-outline-info fas fa-sign-out-alt item login">Logout</i></a>
+        
+      </li>
+    </ul>
+    </div>
   </div>
 </nav>
 
