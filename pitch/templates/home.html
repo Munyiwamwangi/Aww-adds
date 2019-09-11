@@ -27,13 +27,13 @@
         <div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
                 <div row class="content-section ">
                         {%for profileinformation in prof%}
-                        <h6>Client: </h6>: {{profileinformation.bio}}
+                        <h6>Client: {{profileinformation.name}} </h6> Bio : {{profileinformation.bio}}
                         <img height="50" class="img-fluid" src="{{profileinformation.profile_picture.url}}" alt="image">
                         {%endfor%}
                 </div>
                 <hr>
                 <br>
-                <h6 style="color: white; font-style: oblique;">Project Description</h6>
+                <h6 style="color: white; font-style: oblique;">Project Description: </h6>
                 <br>
                 <div style="box-sizing: border-box;" row class="content-section ">
                         {% for image in images%}
