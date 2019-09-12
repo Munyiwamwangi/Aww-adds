@@ -1,6 +1,6 @@
-# Accolade
+# Awww~adds
 
- ##Author: Munyi Mwangi
+## Author: Munyi Mwangi
 
 This is a web app that allows user to post their projects and have them rated based on design,usability and content.
 
