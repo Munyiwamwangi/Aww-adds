@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from . import views
+from.views import singleImage
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -7,6 +8,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url('^$', views.index, name='index'),
     url(r'posts/$', views.welcome, name='welcome'),
+    url(r'posts/ <int:pk> $', singleImage.as_view(), name='single_image'),
     url(r'^search/', views.search_image, name='search_image'),
     url(r'^accunts/profile/$', views.edit_profile_info, name='edit_profile_info'),
     url(r'^upload/$', views.Photo, name='uploadPhoto'),

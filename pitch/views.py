@@ -2,7 +2,13 @@ from django.shortcuts import render, redirect
 from .models import Image, Profile, Comments
 from django.contrib.auth.decorators import login_required
 from .forms import getProfile, uploadPhoto, Comment
-
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
 # Create your views here.
 
 
@@ -11,6 +17,9 @@ def welcome(request):
     profiles = Profile.objects.all()
     prof = Profile.objects.filter(infor=request.user.id)[0:1]
     return render(request, 'home.html', {"images": images, 'prof': prof, 'profiles':profiles})
+
+def singleImage(DetailView):
+    model = Image
 
 
 def search_image(request):

@@ -5,7 +5,7 @@
         <div class="col-md-10 col-xs-10 col-sm-10 col-lg-10">
             {% for image in images%}
             <div >
-                <div href="{% url 'single_image' image.id %}" class="nav-brand ">Project Name: {{image.name}}</div>
+                <div class="nav-brand ">Project Name: {{image.name}}</div>
                 <div class="nav-brand">Contact: {{image.contact}}</div>
                 <div class="text-success">
                     <img height="100%" width="100%" style="display: flex;" class="img-fluid" src="{{image.image.url}}" alt="Pic">
@@ -33,7 +33,7 @@
                 </div>
                 <hr>
                 <br>
-                <h6 style="color: white; font-style: oblique;">Project Description: </h6>
+                <h6 style=" color: white; font-style: oblique;">Project Description: </h6>
                 <br>
                 <div style="box-sizing: border-box;" row class="content-section ">
                         {% for image in images%}
